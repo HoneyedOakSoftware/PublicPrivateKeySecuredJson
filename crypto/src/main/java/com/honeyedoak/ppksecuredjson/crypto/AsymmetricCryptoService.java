@@ -1,7 +1,7 @@
 package com.honeyedoak.ppksecuredjson.crypto;
 
 
-import org.bouncycastle.crypto.CryptoException;
+import com.honeyedoak.ppksecuredjson.crypto.exception.CryptoException;
 
 import java.security.Key;
 import java.security.KeyPair;
