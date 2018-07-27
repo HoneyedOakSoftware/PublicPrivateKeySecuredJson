@@ -4,7 +4,7 @@ dependencies {
     compile group: 'com.squareup', name: 'javapoet', version: '1.11.1'
     compile group: 'org.springframework', name: 'spring-context', version: '5.0.7.RELEASE'
 
-    compile project(":crypto")
+    compile project(":crypto-core")
     compile project(":crypto-annotation")
 
     testCompile group: 'junit', name: 'junit', version: '4.12'

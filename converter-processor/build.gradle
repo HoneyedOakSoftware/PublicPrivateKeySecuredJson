@@ -4,7 +4,7 @@ dependencies {
     compile group: 'com.squareup', name: 'javapoet', version: '1.11.1'
     compile group: 'org.springframework', name: 'spring-context', version: '5.0.7.RELEASE'
 
-    compile project(":crypto")
-    compile project(":converter")
+    compile project(":crypto-core")
+    compile project(":converter-core")
     compile project(":converter-annotation")
 }
