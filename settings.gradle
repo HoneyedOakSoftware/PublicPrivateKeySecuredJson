@@ -1,3 +1,4 @@
 include 'crypto'
 include 'crypto-annotation'
+include 'crypto-processor'
 
