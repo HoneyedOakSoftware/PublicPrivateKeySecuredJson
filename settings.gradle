@@ -1,0 +1,8 @@
+include 'crypto-core'
+include 'crypto-annotation'
+include 'crypto-processor'
+include 'converter-core'
+include 'converter-annotation'
+include 'converter-processor'
+include 'test'
+
