@@ -1,7 +1,7 @@
 package com.honeyedoak.cryptoutils.processor.symmetric;
 
 import com.google.auto.service.AutoService;
-import com.honyedoak.ppksecuredjson.crypto.annotation.SymmetricCryptoService;
+import com.honeyedoak.ppksecuredjson.crypto.annotation.SymmetricCryptoService;
 
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
@@ -13,7 +13,9 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @SupportedAnnotationTypes("com.honeyedoak.cryptoutils.annotation.SymmetricCryptoService")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
@@ -89,5 +91,13 @@ public class CryptoutilsSymmetricCryptoServiceProcessor extends AbstractProcesso
 				Diagnostic.Kind.ERROR,
 				String.format(msg, args),
 				e);
+	}
+
+	@Override
+	public Set<String> getSupportedAnnotationTypes() {
+		Set<Class> suppertedAnnotationClasses = new HashSet<>();
+		suppertedAnnotationClasses.add(SymmetricCryptoService.class);
+
+		return suppertedAnnotationClasses.stream().map(Class::getName).collect(Collectors.toSet());
 	}
 }

@@ -11,9 +11,10 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-@SupportedAnnotationTypes("com.honeyedoak.ppksecuredws.annotation.SecureJsonConverter")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 @AutoService(Processor.class)
 public class SecureJsonConverterProcessor extends AbstractProcessor {
@@ -78,5 +79,14 @@ public class SecureJsonConverterProcessor extends AbstractProcessor {
 				Diagnostic.Kind.ERROR,
 				String.format(msg, args),
 				e);
+	}
+
+	@Override
+	public Set<String> getSupportedAnnotationTypes() {
+		Set<Class> suppertedAnnotationClasses = new HashSet<>();
+		suppertedAnnotationClasses.add(com.honeyedoak.securedjson.converter.annotation.SecureJsonConverter.class);
+
+
+		return suppertedAnnotationClasses.stream().map(Class::getName).collect(Collectors.toSet());
 	}
 }

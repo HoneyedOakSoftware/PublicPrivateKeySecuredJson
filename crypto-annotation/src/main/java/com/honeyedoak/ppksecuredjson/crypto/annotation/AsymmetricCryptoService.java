@@ -1,4 +1,4 @@
-package com.honyedoak.ppksecuredjson.crypto.annotation;
+package com.honeyedoak.ppksecuredjson.crypto.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

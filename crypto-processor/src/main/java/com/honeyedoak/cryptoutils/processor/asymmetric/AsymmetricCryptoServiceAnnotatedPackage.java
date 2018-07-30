@@ -1,5 +1,6 @@
 package com.honeyedoak.cryptoutils.processor.asymmetric;
 
+import com.honeyedoak.ppksecuredjson.crypto.annotation.AsymmetricCryptoService;
 import com.squareup.javapoet.*;
 import org.apache.commons.lang3.StringUtils;
 
@@ -21,7 +22,7 @@ public class AsymmetricCryptoServiceAnnotatedPackage {
 
 	public AsymmetricCryptoServiceAnnotatedPackage(PackageElement packageElement) throws IllegalArgumentException {
 		this.annotatedPackageElement = packageElement;
-		com.honyedoak.ppksecuredjson.crypto.annotation.AsymmetricCryptoService annotation = packageElement.getAnnotation(com.honyedoak.ppksecuredjson.crypto.annotation.AsymmetricCryptoService.class);
+		AsymmetricCryptoService annotation = packageElement.getAnnotation(AsymmetricCryptoService.class);
 		serviceName = annotation.serviceName();
 		algorithm = annotation.algorithm();
 		keySize = annotation.keySize();
@@ -29,19 +30,19 @@ public class AsymmetricCryptoServiceAnnotatedPackage {
 		if (StringUtils.isEmpty(serviceName)) {
 			throw new IllegalArgumentException(
 					String.format("serviceName() in @%s for class %s is null or empty! that's not allowed",
-							com.honyedoak.ppksecuredjson.crypto.annotation.AsymmetricCryptoService.class.getSimpleName(), packageElement.getQualifiedName().toString()));
+							AsymmetricCryptoService.class.getSimpleName(), packageElement.getQualifiedName().toString()));
 		}
 
 		if (StringUtils.isEmpty(algorithm)) {
 			throw new IllegalArgumentException(
 					String.format("algorithm() in @%s for class %s is null or empty! that's not allowed",
-							com.honyedoak.ppksecuredjson.crypto.annotation.AsymmetricCryptoService.class.getSimpleName(), packageElement.getQualifiedName().toString()));
+							AsymmetricCryptoService.class.getSimpleName(), packageElement.getQualifiedName().toString()));
 		}
 
 		if (keySize < 1) {
 			throw new IllegalArgumentException(
 					String.format("keySize() in @%s for class %s is zero or negative! that's not allowed",
-							com.honyedoak.ppksecuredjson.crypto.annotation.AsymmetricCryptoService.class.getSimpleName(), packageElement.getQualifiedName().toString()));
+							AsymmetricCryptoService.class.getSimpleName(), packageElement.getQualifiedName().toString()));
 		}
 	}
 
@@ -62,7 +63,7 @@ public class AsymmetricCryptoServiceAnnotatedPackage {
 	}
 
 	public void generateCode(Filer filer) throws IOException {
-		FieldSpec asymmetricCryptoUtils = FieldSpec.builder(com.honyedoak.ppksecuredjson.crypto.annotation.AsymmetricCryptoService.class, "asymmetricCryptoUtils", Modifier.PRIVATE, Modifier.FINAL)
+		FieldSpec asymmetricCryptoUtils = FieldSpec.builder(com.honeyedoak.ppksecuredjson.crypto.AsymmetricCryptoService.class, "asymmetricCryptoUtils", Modifier.PRIVATE, Modifier.FINAL)
 				.build();
 
 		MethodSpec constructor = MethodSpec.constructorBuilder()

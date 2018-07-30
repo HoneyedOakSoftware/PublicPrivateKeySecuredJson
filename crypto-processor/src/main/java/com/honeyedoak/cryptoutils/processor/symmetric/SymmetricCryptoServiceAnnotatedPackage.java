@@ -1,5 +1,6 @@
 package com.honeyedoak.cryptoutils.processor.symmetric;
 
+import com.honeyedoak.ppksecuredjson.crypto.annotation.SymmetricCryptoService;
 import com.squareup.javapoet.*;
 import org.apache.commons.lang3.StringUtils;
 
@@ -16,20 +17,20 @@ public class SymmetricCryptoServiceAnnotatedPackage {
 
 	public SymmetricCryptoServiceAnnotatedPackage(PackageElement packageElement) throws IllegalArgumentException {
 		this.annotatedPackageElement = packageElement;
-		com.honyedoak.ppksecuredjson.crypto.annotation.SymmetricCryptoService annotation = packageElement.getAnnotation(com.honyedoak.ppksecuredjson.crypto.annotation.SymmetricCryptoService.class);
+		SymmetricCryptoService annotation = packageElement.getAnnotation(SymmetricCryptoService.class);
 		serviceName = annotation.serviceName();
 		algorithm = annotation.algorithm();
 
 		if (StringUtils.isEmpty(serviceName)) {
 			throw new IllegalArgumentException(
 					String.format("serviceName() in @%s for class %s is null or empty! that's not allowed",
-							com.honyedoak.ppksecuredjson.crypto.annotation.SymmetricCryptoService.class.getSimpleName(), packageElement.getQualifiedName().toString()));
+							SymmetricCryptoService.class.getSimpleName(), packageElement.getQualifiedName().toString()));
 		}
 
 		if (StringUtils.isEmpty(algorithm)) {
 			throw new IllegalArgumentException(
 					String.format("algorithm() in @%s for class %s is null or empty! that's not allowed",
-							com.honyedoak.ppksecuredjson.crypto.annotation.SymmetricCryptoService.class.getSimpleName(), packageElement.getQualifiedName().toString()));
+							SymmetricCryptoService.class.getSimpleName(), packageElement.getQualifiedName().toString()));
 		}
 	}
 
@@ -48,7 +49,7 @@ public class SymmetricCryptoServiceAnnotatedPackage {
 	public void generateCode(Filer filer) throws IOException {
 		String symmetricCryptoServiceFieldName = "symmetricCryptoService";
 
-		FieldSpec symmetricCryptoUtils = FieldSpec.builder(com.honyedoak.ppksecuredjson.crypto.annotation.SymmetricCryptoService.class, symmetricCryptoServiceFieldName, Modifier.PRIVATE, Modifier.FINAL)
+		FieldSpec symmetricCryptoUtils = FieldSpec.builder(com.honeyedoak.ppksecuredjson.crypto.SymmetricCryptoService.class, symmetricCryptoServiceFieldName, Modifier.PRIVATE, Modifier.FINAL)
 				.build();
 
 		MethodSpec constructor = MethodSpec.constructorBuilder()
@@ -99,7 +100,7 @@ public class SymmetricCryptoServiceAnnotatedPackage {
 		TypeSpec asymmetricCryptoService = TypeSpec.classBuilder(serviceName)
 				.addAnnotation(generated)
 				.addModifiers(Modifier.PUBLIC)
-				.addSuperinterface(com.honyedoak.ppksecuredjson.crypto.annotation.SymmetricCryptoService.class)
+				.addSuperinterface(com.honeyedoak.ppksecuredjson.crypto.SymmetricCryptoService.class)
 				.addAnnotation(org.springframework.stereotype.Service.class)
 				.addField(symmetricCryptoUtils)
 				.addMethod(constructor)

@@ -15,7 +15,7 @@ public @interface SecureJsonConverter {
 
 	String charsetDefaultValue() default "UTF-8";
 
-	String oneTimePasswordLengthPropertyName() default  "ppksecuredws.oneTimePasswordLength";
+	String oneTimePasswordLengthPropertyName() default "ppksecuredws.oneTimePasswordLength";
 
 	int oneTimePasswordLengthDefaultValue() default  200;
 
